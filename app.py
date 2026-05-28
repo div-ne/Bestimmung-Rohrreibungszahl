@@ -5,7 +5,7 @@ import streamlit as st
 import CoolProp.CoolProp as cp
 
 APP_TITLE = "Bestimmung-Rohrreibungszahl"
-APP_VERSION = "0.7.3V"
+APP_VERSION = "0.7.4V"
 MOODY_SOURCE = "https://en.wikipedia.org/wiki/Moody_chart"
 REPO_URL = "https://github.com/div-ne/Bestimmung-Rohrreibungszahl/"
 MOODY_IMAGE = os.path.join(os.path.dirname(__file__), "assets", "moody-diagram.jpg")
@@ -259,9 +259,10 @@ with right:
                 ],
                 ignore_index=True,
             )
+            csv_content = f"{APP_TITLE};{APP_VERSION}\n" + csv_export.to_csv(index=False, sep=";")
             st.download_button(
                 label="CSV herunterladen",
-                data=csv_export.to_csv(index=False, sep=";").encode("utf-8"),
+                data=csv_content.encode("utf-8-sig"),
                 file_name="Bestimmung-Rohrreibungszahl.csv",
                 mime="text/csv",
                 use_container_width=True,

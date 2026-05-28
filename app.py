@@ -5,7 +5,7 @@ import streamlit as st
 import CoolProp.CoolProp as cp
 
 APP_TITLE = "Bestimmung-Rohrreibungszahl"
-APP_VERSION = "0.7.1V"
+APP_VERSION = "0.7.3V"
 MOODY_SOURCE = "https://en.wikipedia.org/wiki/Moody_chart"
 REPO_URL = "https://github.com/div-ne/Bestimmung-Rohrreibungszahl/"
 MOODY_IMAGE = os.path.join(os.path.dirname(__file__), "assets", "moody-diagram.jpg")
@@ -200,7 +200,7 @@ def calculate_lambda(fluid, temperature_c, pressure_bar, diameter_mm, velocity_m
             ("Reynolds-Zahl Re [-]", f"{re:.0f}"),
             ("Relative Rauheit k/d [-]", f"{epsilon_k:.2e}"),
             ("Berechnungsgrundlage", selected),
-            ("Strömungstyp", flow_type),
+            ("Strömungsbedingung", flow_type),
             ("Rohrreibungszahl λ [-]", lambda_result),
         ],
         columns=["Parameter", "Wert"],
@@ -262,7 +262,7 @@ with right:
             st.download_button(
                 label="CSV herunterladen",
                 data=csv_export.to_csv(index=False, sep=";").encode("utf-8"),
-                file_name="rohrreibungszahl-ergebnis.csv",
+                file_name="Bestimmung-Rohrreibungszahl.csv",
                 mime="text/csv",
                 use_container_width=True,
             )

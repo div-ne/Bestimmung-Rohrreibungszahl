@@ -138,9 +138,6 @@ FLUIDS = {
 
 st.set_page_config(page_title=APP_TITLE, layout="wide", page_icon="logo.png")
 
-if "run_calculation" not in st.session_state:
-    st.session_state["run_calculation"] = False
-
 
 def calculate_lambda(fluid, temperature_c, pressure_bar, diameter_mm, velocity_ms, roughness_mm):
     k = roughness_mm * 1e-3
@@ -243,7 +240,7 @@ with left:
 
 with right:
     st.subheader("Ergebnis")
-    if run:
+    if st.session_state.run_calculation:
         try:
             overview_df, formulas_df = calculate_lambda(fluid, float(temperature_c), float(pressure_bar), float(diameter_mm), float(velocity_ms), float(roughness_mm))
             st.dataframe(overview_df, use_container_width=True, hide_index=True)

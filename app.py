@@ -230,7 +230,8 @@ st.caption("Berechnung der Rohrreibungszahl auf Basis von Fluid, Temperatur, Dru
 left, right = st.columns([1, 1.2])
 
 with left:
-    fluid = st.text_input("Fluid", value="H2O")
+    fluid_label = st.selectbox("Fluid", list(FLUIDS.keys()), index=list(FLUIDS.keys()).index("Wasser"))
+    fluid = FLUIDS[fluid_label]
     temperature_c = st.number_input("Temperatur [°C]", value=10.0, step=0.1)
     pressure_bar = st.number_input("Druck [bar]", value=1.01325, step=0.00001, format="%.5f")
     diameter_mm = st.number_input("Innendurchmesser [mm]", value=50.0, step=0.1)
@@ -240,12 +241,12 @@ with left:
 
 with right:
     st.subheader("Ergebnis")
-    if st.session_state.run_calculation:
+    if run:
         try:
             overview_df, formulas_df = calculate_lambda(fluid, float(temperature_c), float(pressure_bar), float(diameter_mm), float(velocity_ms), float(roughness_mm))
-            st.dataframe(overview_df, use_container_width=True, hide_index=True)
+            st.dataframe(overview_df, use_container_width=True, hide_index=True, height=(len(overview_df) + 1) * 35 + 3)
             with st.expander("Formeln im Vergleich"):
-                st.dataframe(formulas_df, use_container_width=True, hide_index=True)
+                st.dataframe(formulas_df, use_container_width=True, hide_index=True, height=(len(formulas_df) + 1) * 35 + 3)
             csv_export = pd.concat(
                 [
                     overview_df.assign(Bereich="Ergebnis"),

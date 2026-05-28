@@ -131,6 +131,7 @@ FLUIDS = {
     "R702": "Hydrogen",
     "R717": "Ammonia",
     "R729": "Air",
+    "R744": "CO2",
     "R1233zd(E)": "R1233zd(E)",
     "R1234yf": "R1234yf",
     "R1234ze(E)": "R1234ze(E)",

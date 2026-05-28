@@ -5,7 +5,7 @@ import streamlit as st
 import CoolProp.CoolProp as cp
 
 APP_TITLE = "Bestimmung-Rohrreibungszahl"
-APP_VERSION = "0.5.0V"
+APP_VERSION = "0.4.0V"
 MOODY_SOURCE = "https://en.wikipedia.org/wiki/Moody_chart"
 REPO_URL = "https://github.com/div-ne/Bestimmung-Rohrreibungszahl/"
 MOODY_IMAGE = os.path.join(os.path.dirname(__file__), "assets", "moody-diagram.jpg")
@@ -244,9 +244,9 @@ with right:
     if run:
         try:
             overview_df, formulas_df = calculate_lambda(fluid, float(temperature_c), float(pressure_bar), float(diameter_mm), float(velocity_ms), float(roughness_mm))
-            st.table(overview_df.set_index("Parameter"))
+            st.dataframe(overview_df, use_container_width=True, hide_index=True, height=(len(overview_df) + 1) * 35 + 3)
             with st.expander("Formeln im Vergleich"):
-                st.table(formulas_df)
+                st.dataframe(formulas_df, use_container_width=True, hide_index=True, height=(len(formulas_df) + 1) * 35 + 3)
             csv_export = pd.concat(
                 [
                     overview_df.assign(Bereich="Ergebnis"),

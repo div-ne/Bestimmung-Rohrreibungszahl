@@ -5,7 +5,7 @@ import streamlit as st
 import CoolProp.CoolProp as cp
 
 APP_TITLE = "Bestimmung-Rohrreibungszahl"
-APP_VERSION = "0.7.4V"
+APP_VERSION = "0.7.5V"
 MOODY_SOURCE = "https://en.wikipedia.org/wiki/Moody_chart"
 REPO_URL = "https://github.com/div-ne/Bestimmung-Rohrreibungszahl/"
 MOODY_IMAGE = os.path.join(os.path.dirname(__file__), "assets", "moody-diagram.jpg")
